@@ -75,8 +75,6 @@ def serve(server, uri, tx, rx):
         pass
 
 def reloadwsgi(uri, host='127.0.0.1', port=8080):
-    host = '127.0.0.1'
-    port = 8080
     server = make_server(host, port, None)
     
     # tx, rx from the subprocess' perspective.
