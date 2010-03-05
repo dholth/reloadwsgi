@@ -5,7 +5,7 @@ install_requires = ['PasteDeploy']
 if sys.version_info[:2] < (2, 6):
     install_requires += ['multiprocessing']
 
-version = '0.1'
+version = '0.2'
 
 setup(name='ReloadWSGI',
       version=version,
