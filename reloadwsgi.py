@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Reloading WSGI server for development.
-# Replacement for 'paster serve --reload pastedeploy.ini'
+# Robust WSGI auto-reloading for development.
 #
-# Wait until the new version of the code loads up before killing the
-# running old version. If you save a syntax error you can still use the
-# prior version of your application, and it will attempt to reload again
-# the next time you save.
+# Reload a WSGI application on source change. Keep the old code alive
+# when the change has syntax errors. Never close the socket, never refuse
+# a connection.
+#
+# Replacement for 'paster serve --reload config.ini'
 #
 # Daniel Holth <dholth@fastmail.fm>
 
