@@ -3,7 +3,7 @@
 # Reloading WSGI server for development.
 # Replacement for 'paster serve --reload pastedeploy.ini'
 #
-# Waits until the new version of the code loads up before killing the
+# Wait until the new version of the code loads up before killing the
 # running old version. If you save a syntax error you can still use the
 # prior version of your application, and it will attempt to reload again
 # the next time you save.
@@ -74,7 +74,7 @@ def serve(server, uri, tx, rx):
     except KeyboardInterrupt:
         pass
 
-def reloadwsgi(uri, host='127.0.0.1', port=8080):
+def reloadwsgi(uri, host='localhost', port=8080):
     server = make_server(host, port, None)
     
     # tx, rx from the subprocess' perspective.
@@ -103,6 +103,25 @@ def reloadwsgi(uri, host='127.0.0.1', port=8080):
             if not active_children():
                 return
 
+def main():
+    import optparse
+    import os.path
+    usage = """Usage: %prog [options] config.ini
+Robust automatic reloading for WSGI development."""
+    parser = optparse.OptionParser(usage)
+    parser.add_option("-H", "--host", dest="hostname",
+            default="localhost", type="string",
+            help="Listen on hostname/address instead of localhost")
+    parser.add_option("-p", "--port", dest="port",
+            default=8080, type="int",
+            help="Listen on port instead of 8080")
+    (options, args) = parser.parse_args()
+    if len(args) != 1:
+        parser.error("Must specify exactly one Paste Deploy .ini file.")
+    hostname = options.hostname
+    port = options.port
+    config = os.path.abspath(args[0])
+    reloadwsgi('config:%s' % config)
 
 def app_factory(global_config, **local_conf):
     import wsgiref.simple_server

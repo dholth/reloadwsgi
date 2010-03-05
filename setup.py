@@ -26,5 +26,7 @@ your running application until the new version has loaded successfully.
       install_requires=install_requires,
       entry_points="""
       # -*- Entry points: -*-
+      [console_scripts]
+      reloadwsgi = reloadwsgi:main
       """,
       )
