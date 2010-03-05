@@ -118,10 +118,10 @@ Robust automatic reloading for WSGI development."""
     (options, args) = parser.parse_args()
     if len(args) != 1:
         parser.error("Must specify exactly one Paste Deploy .ini file.")
-    hostname = options.hostname
+    host = options.hostname
     port = options.port
     config = os.path.abspath(args[0])
-    reloadwsgi('config:%s' % config)
+    reloadwsgi('config:%s' % config, host=host, port=port)
 
 def app_factory(global_config, **local_conf):
     import wsgiref.simple_server
