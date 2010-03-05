@@ -63,15 +63,15 @@ quits silently ::
       keywords='wsgi',
       author='Daniel Holth',
       author_email='dholth@fastmail.fm',
-      url='',
+      url='http://bitbucket.org/dholth/reloadwsgi/',
       license='MIT',
       py_modules=['reloadwsgi'],
       include_package_data=True,
       zip_safe=False,
       install_requires=install_requires,
       entry_points="""
-      # -*- Entry points: -*-
-      [console_scripts]
-      reloadwsgi = reloadwsgi:main
+# -*- Entry points: -*-
+[console_scripts]
+reloadwsgi = reloadwsgi:main
       """,
       )
