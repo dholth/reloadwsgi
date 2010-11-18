@@ -5,18 +5,26 @@ install_requires = ['PasteDeploy']
 if sys.version_info[:2] < (2, 6):
     install_requires += ['multiprocessing']
 
-version = '0.2'
+version = '0.3'
 
 setup(name='ReloadWSGI',
       version=version,
       description="Robust WSGI auto-reloading for development.",
       long_description="""\
 
+Replacement for 'paster serve --reload config.ini'.
+
 Reload a WSGI application on source change. Keep the old code alive
 when the change has syntax errors. Never close the socket, never refuse
 a connection.
 
-Replacement for 'paster serve --reload config.ini'.
+As of version 0.3, ReloadWSGI also supports reloading a server specified
+in the config file. This is appropriate for wsgi servers such as
+mongrel2_wsgi which are able to support two concurrent instances
+without stepping on each other's network connection. Once ReloadWSGI
+confirms the second server can load without throwing e.g. a syntax error,
+the original server quits and Mongrel2's automatic load balancing
+sends requests to the newer instance.
 
 
 PID 4197 notifies us of a change in quux.py ::
